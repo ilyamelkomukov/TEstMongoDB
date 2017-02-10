@@ -14,7 +14,7 @@ module.exports = {
     alias: {
       App: path.resolve(__dirname, './client/components/App.jsx')
     }
-  }
+  },
 
   devtool: 'source-map',
   watch: true,
