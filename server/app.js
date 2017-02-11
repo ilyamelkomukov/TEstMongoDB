@@ -1,4 +1,5 @@
 const express = require('express'),
+  path = require('path'),
   assert = require('assert'),
   db = require('./dbUtils/dbUtils.js'),
   bodyParser = require('body-parser'),
@@ -11,10 +12,14 @@ db.setUpConnection();
 
 app.use(bodyParser.json());
 
-app.use(express.static(path.resolve(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, '../public'), {
+  dotfiles: 'ignore',
+  index: false
+}));
 
 app.get('*', function(req, res, next) {
-  res.sendFile(path.resolve(__dirname, 'public/index.html'));
+  console.log('Request: [GET]', req.originalUrl);
+  res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
 app.get('/' + conConfig.name, (req, res) => {
@@ -22,7 +27,6 @@ app.get('/' + conConfig.name, (req, res) => {
     res.send(data);
   });
 });
-
 
 /**
  * Error Handling

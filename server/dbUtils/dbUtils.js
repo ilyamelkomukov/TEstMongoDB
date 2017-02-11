@@ -2,7 +2,8 @@ const mongoose = require('mongoose'),
   conConfig = require('../conConfig/conConfig.js'),
   User = require('../models/User.js');
 
-module.exports.dbUtils = {
+let dbUtils = {
+
   setUpConnection: function() {
     mongoose.connect(`mongodb://${conConfig.host}:${conConfig.dbPort}/${conConfig.name}`);
   },
@@ -11,3 +12,5 @@ module.exports.dbUtils = {
     return User.find();
   }
 };
+
+module.exports = dbUtils;

@@ -26,6 +26,14 @@ class TEst extends React.Component {
   }
 
   render() {
+    let users = this.state.user.map((user, index) => {
+      return(
+        <div key={index}>
+          {user.uesrId} {user.name}
+        </div>
+      );
+    });
+
     return(
       <div>
         {this.state.users}

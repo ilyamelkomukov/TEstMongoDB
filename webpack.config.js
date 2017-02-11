@@ -20,7 +20,7 @@ module.exports = {
   watch: true,
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx$|\.js$/,
         loader: 'babel-loader',
