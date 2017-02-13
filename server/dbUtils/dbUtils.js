@@ -15,6 +15,10 @@ let dbUtils = {
     return User.find();
   },
 
+  getUser: function(userId) {
+    return User.find({userId: userId});
+  },
+
   populateDB: function() {
     var users = [
       {
@@ -42,6 +46,14 @@ let dbUtils = {
         }
       });
     });
+  },
+
+  killPopulationOfDB: function() {
+    User.remove({}, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    })
   }
 };
 

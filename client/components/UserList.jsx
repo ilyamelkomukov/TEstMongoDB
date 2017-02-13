@@ -1,5 +1,7 @@
 const React = require('react'),
-  api = require('../api/index.js');
+  api = require('api'),
+  User = require('User'),
+  {Link} = require('react-router');
 
 class UserList extends React.Component {
   constructor(props) {
@@ -50,7 +52,10 @@ class UserList extends React.Component {
       users = this.state.users.map((user, index) => {
         return(
           <div key={index}>
-            {user.userId} {user.name} {user._id}
+            <Link
+              to={`/users/${user.userId}`}>
+              {user.name}
+            </Link>
           </div>
         );
       });
@@ -58,7 +63,9 @@ class UserList extends React.Component {
       users = 'No users';
     }
 
-
+    let usersList = (<ul>
+      {users}
+    </ul>);
 
     return(
       <div>
@@ -67,7 +74,7 @@ class UserList extends React.Component {
           onClick={this.listUsers}>
           List users
         </button>
-        {users}
+        {usersList}
       </div>
     );
   }

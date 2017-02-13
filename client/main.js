@@ -1,8 +1,9 @@
 const React = require('react'),
   ReactDOM = require('react-dom'),
-  App = require('App');
+  App = require('App'),
+  Router = require('Router');
 
 ReactDOM.render(
-  <App />,
+  Router,
   document.getElementById('root')
 );

@@ -19,19 +19,36 @@ app.use(express.static(path.resolve(__dirname, '../public'), {
   index: false
 }));
 
+/*** To fill db or clear db ***/
 // db.populateDB();
+// db.killPopulationOfDB();
 
+
+// TODO: Роутинг до конкретного пользователя "проваливается" в default, т.к. case с :userId не
+// работает, это просто строка без params. Отлову params с меткой getuser мешает запрос
+// на favicon. Есть ли путь отлавливать getuser, можно ли осуществлять навигацию средствами
+// react-router?
 app.get('*', function(req, res, next) {
+
+
   switch (req.originalUrl) {
-    case '/userscl': {
+    case '/userscl/users':
       console.log('Request: [GET]', req.originalUrl);
       db.getUsers().then((data) => {
         res.send(data);
       });
-    }
-      break;
+    break;
+
+    case '/userscl/users/:userId':
+      console.log('Request get User: [GET]', req.originalUrl);
+      console.log(req.params.userId);
+      db.getUser(req.params.userId).then((data) => {
+        res.send(data);
+      });
+    break;
+
     default: {
-      // console.log('Request: [GET]', req.originalUrl);
+      console.log('Watch here!! Request: [GET]', req.originalUrl + 'Params: ' + req.params.userId + '**');
       res.sendFile(path.resolve(__dirname, '../public/index.html'));
     }
   }

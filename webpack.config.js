@@ -12,8 +12,12 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
+      api: path.resolve(__dirname, './client/api/index.js'),
       App: path.resolve(__dirname, './client/components/App.jsx'),
-      UserList: path.resolve(__dirname, './client/components/UserList.jsx')
+      Home: path.resolve(__dirname, './client/components/Home.jsx'),
+      UserList: path.resolve(__dirname, './client/components/UserList.jsx'),
+      User: path.resolve(__dirname, './client/components/User.jsx'),
+      Router: path.resolve(__dirname, './client/components/Router.jsx')
     }
   },
 
