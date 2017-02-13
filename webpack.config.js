@@ -12,7 +12,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      App: path.resolve(__dirname, './client/components/App.jsx')
+      App: path.resolve(__dirname, './client/components/App.jsx'),
+      UserList: path.resolve(__dirname, './client/components/UserList.jsx')
     }
   },
 

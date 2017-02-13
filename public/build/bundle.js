@@ -10056,7 +10056,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var React = __webpack_require__(32),
-    TEst = __webpack_require__(108);
+    UserList = __webpack_require__(108);
 
 // create app for TEst
 
@@ -10075,7 +10075,7 @@ var App = function (_React$Component) {
       return React.createElement(
         'div',
         null,
-        React.createElement(TEst, null)
+        React.createElement(UserList, null)
       );
     }
   }]);
@@ -10948,7 +10948,7 @@ var axios = __webpack_require__(89),
 
 var api = {
   getUsers: function getUsers() {
-    return axios.get(conConfig.prefix + '/' + conConfig.name + '/main');
+    return axios.get(conConfig.prefix + '/' + conConfig.name);
   }
 
 };
@@ -10973,29 +10973,47 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = __webpack_require__(32),
     api = __webpack_require__(107);
 
-var TEst = function (_React$Component) {
-  _inherits(TEst, _React$Component);
+var UserList = function (_React$Component) {
+  _inherits(UserList, _React$Component);
 
-  function TEst(props) {
-    _classCallCheck(this, TEst);
+  function UserList(props) {
+    _classCallCheck(this, UserList);
 
-    var _this = _possibleConstructorReturn(this, (TEst.__proto__ || Object.getPrototypeOf(TEst)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (UserList.__proto__ || Object.getPrototypeOf(UserList)).call(this, props));
 
     _this.state = {
       users: []
     };
+
+    _this.listUsers = _this.listUsers.bind(_this);
     return _this;
   }
 
-  _createClass(TEst, [{
+  _createClass(UserList, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
+      // let newUsers = [];
+
+      // api.getUsers()
+      //   .then((res) => {
+      //     newUsers = res.data;
+      //     console.dir(newUsers);
+      //     this.setState({
+      //       users: newUsers
+      //     });
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+
+    }
+  }, {
+    key: 'listUsers',
+    value: function listUsers() {
       var _this2 = this;
 
-      var newUsers = [];
-
       api.getUsers().then(function (res) {
-        newUsers = res.data;
+        var newUsers = res.data;
         console.dir(newUsers);
         _this2.setState({
           users: newUsers
@@ -11009,32 +11027,42 @@ var TEst = function (_React$Component) {
     value: function render() {
 
       var users = void 0;
-      /*
-      if (this.state.users.length != 0) {
-        users = this.state.users.map((user, index) => {
-          return(
-            <div key={index}>
-              {user.uesrId} {user.name}
-            </div>
+
+      if (this.state.users.length) {
+        users = this.state.users.map(function (user, index) {
+          return React.createElement(
+            'div',
+            { key: index },
+            user.userId,
+            ' ',
+            user.name,
+            ' ',
+            user._id
           );
         });
       } else {
         users = 'No users';
       }
-      */
 
       return React.createElement(
         'div',
         null,
-        this.state.users
+        React.createElement(
+          'button',
+          {
+            ref: 'button',
+            onClick: this.listUsers },
+          'List users'
+        ),
+        users
       );
     }
   }]);
 
-  return TEst;
+  return UserList;
 }(React.Component);
 
-module.exports = TEst;
+module.exports = UserList;
 
 /***/ }),
 /* 109 */

@@ -1,5 +1,5 @@
 const React = require('react'),
-  TEst = require('./TEst.jsx');
+  UserList = require('UserList');
 
 // create app for TEst
 
@@ -11,7 +11,7 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <TEst/>
+        <UserList/>
       </div>
     );
   }

@@ -11,7 +11,7 @@ let dbUtils = {
     mongoose.connect(`mongodb://${conConfig.host}:${conConfig.dbPort}/${conConfig.name}`);
   },
 
-  listUsers: function() {
+  getUsers: function() {
     return User.find();
   },
 

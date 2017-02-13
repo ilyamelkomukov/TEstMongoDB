@@ -3,7 +3,7 @@ const axios = require('axios'),
 
 var api = {
   getUsers: function() {
-    return axios.get(`${conConfig.prefix}/${conConfig.name}/main`);
+    return axios.get(`${conConfig.prefix}/${conConfig.name}`);
   }
 
 };

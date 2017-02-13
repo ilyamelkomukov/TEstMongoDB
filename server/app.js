@@ -21,17 +21,34 @@ app.use(express.static(path.resolve(__dirname, '../public'), {
 
 // db.populateDB();
 
+app.get('*', function(req, res, next) {
+  switch (req.originalUrl) {
+    case '/userscl': {
+      console.log('Request: [GET]', req.originalUrl);
+      db.getUsers().then((data) => {
+        res.send(data);
+      });
+    }
+      break;
+    default: {
+      // console.log('Request: [GET]', req.originalUrl);
+      res.sendFile(path.resolve(__dirname, '../public/index.html'));
+    }
+  }
+});
 
+/*
 app.get('*', function(req, res, next) {
   console.log('Request: [GET]', req.originalUrl);
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
 app.get('/userscl/main', (req, res) => {
-  db.listUsers().then(data => {
+  db.getUsers().then(data => {
     res.send(data);
   });
 });
+*/
 
 /**
  * Error Handling
