@@ -14,7 +14,7 @@ class TEst extends React.Component {
 
     api.getUsers()
       .then((res) => {
-        newUsers = res;
+        newUsers = res.data;
         console.dir(newUsers);
         this.setState({
           users: newUsers

@@ -10995,7 +10995,7 @@ var TEst = function (_React$Component) {
       var newUsers = [];
 
       api.getUsers().then(function (res) {
-        newUsers = res;
+        newUsers = res.data;
         console.dir(newUsers);
         _this2.setState({
           users: newUsers
