@@ -6,6 +6,8 @@ const express = require('express'),
   conConfig = require('./conConfig/conConfig.js'),
   mongoose = require('mongoose');
 
+mongoose.Promise = require('bluebird');
+
 const app = express();
 
 db.setUpConnection();
@@ -17,16 +19,19 @@ app.use(express.static(path.resolve(__dirname, '../public'), {
   index: false
 }));
 
+db.populateDB();
+
+app.get(' /userscl/main', (req, res) => {
+  db.listUsers().then(data => {
+    res.send(data);
+  });
+});
+
 app.get('*', function(req, res, next) {
   console.log('Request: [GET]', req.originalUrl);
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
-app.get('/' + conConfig.name, (req, res) => {
-  db.listUsers().then(data => {
-    res.send(data);
-  });
-});
 
 /**
  * Error Handling

@@ -5,18 +5,19 @@ class TEst extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: {}
+      users: []
     };
   }
 
   componentWillMount() {
-    let newState = {};
+    let newUsers = [];
 
-    api.listUsers()
+    api.getUsers()
       .then((res) => {
-        newState = res;
+        newUsers = res;
+        console.dir(newUsers);
         this.setState({
-          users: newState
+          users: newUsers
         });
       })
       .catch((err) => {
@@ -26,13 +27,22 @@ class TEst extends React.Component {
   }
 
   render() {
-    let users = this.state.user.map((user, index) => {
-      return(
-        <div key={index}>
-          {user.uesrId} {user.name}
-        </div>
-      );
-    });
+
+    let users;
+    /*
+    if (this.state.users.length != 0) {
+      users = this.state.users.map((user, index) => {
+        return(
+          <div key={index}>
+            {user.uesrId} {user.name}
+          </div>
+        );
+      });
+    } else {
+      users = 'No users';
+    }
+    */
+
 
     return(
       <div>

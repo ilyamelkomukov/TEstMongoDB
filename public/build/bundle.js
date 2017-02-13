@@ -10946,11 +10946,14 @@ module.exports = function spread(callback) {
 var axios = __webpack_require__(89),
     conConfig = __webpack_require__(109);
 
-module.exports = {
-  listUsers: function listUsers() {
-    return axios.get(conConfig.prefix + '/' + conConfig.name);
+var api = {
+  getUsers: function getUsers() {
+    return axios.get(conConfig.prefix + '/' + conConfig.name + '/main');
   }
+
 };
+
+module.exports = api;
 
 /***/ }),
 /* 108 */
@@ -10979,7 +10982,7 @@ var TEst = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (TEst.__proto__ || Object.getPrototypeOf(TEst)).call(this, props));
 
     _this.state = {
-      users: {}
+      users: []
     };
     return _this;
   }
@@ -10989,12 +10992,13 @@ var TEst = function (_React$Component) {
     value: function componentWillMount() {
       var _this2 = this;
 
-      var newState = {};
+      var newUsers = [];
 
-      api.listUsers().then(function (res) {
-        newState = res;
+      api.getUsers().then(function (res) {
+        newUsers = res;
+        console.dir(newUsers);
         _this2.setState({
-          users: newState
+          users: newUsers
         });
       }).catch(function (err) {
         console.log(err);
@@ -11003,15 +11007,21 @@ var TEst = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var users = this.state.user.map(function (user, index) {
-        return React.createElement(
-          'div',
-          { key: index },
-          user.uesrId,
-          ' ',
-          user.name
-        );
-      });
+
+      var users = void 0;
+      /*
+      if (this.state.users.length != 0) {
+        users = this.state.users.map((user, index) => {
+          return(
+            <div key={index}>
+              {user.uesrId} {user.name}
+            </div>
+          );
+        });
+      } else {
+        users = 'No users';
+      }
+      */
 
       return React.createElement(
         'div',
