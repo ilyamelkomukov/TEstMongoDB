@@ -12,11 +12,14 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
+
+      // TODO: Create files, paths and folders for containers and views, after - redux
+
       api: path.resolve(__dirname, './client/api/index.js'),
-      App: path.resolve(__dirname, './client/components/App.jsx'),
-      Home: path.resolve(__dirname, './client/components/Home.jsx'),
-      UserList: path.resolve(__dirname, './client/components/UserList.jsx'),
-      User: path.resolve(__dirname, './client/components/User.jsx'),
+      App: path.resolve(__dirname, './client/components/App/AppContainer.jsx'),
+      Home: path.resolve(__dirname, './client/components/Home/HomeContainer.jsx'),
+      UserList: path.resolve(__dirname, './client/components/UserList/UserListContainer.jsx'),
+      User: path.resolve(__dirname, './client/components/User/UserContainer.jsx'),
       Router: path.resolve(__dirname, './client/components/Router.jsx')
     }
   },
