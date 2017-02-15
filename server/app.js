@@ -28,44 +28,40 @@ app.use(express.static(path.resolve(__dirname, '../public'), {
 // работает, это просто строка без params. Отлову params с меткой getuser мешает запрос
 // на favicon. Есть ли путь отлавливать getuser, можно ли осуществлять навигацию средствами
 // react-router?
+// TODO: Answer: Переписан switch, сравнение происходит с true, indexof, возвращающий -1 работает
+// с ~, ~indexof('несущ. подстрока') вернет 0, под каждый тип запроса в адрес запроса
+// пишется метка, после к-ой могут идти аргументы (без ?, !, #, $ и т.д.)
+// запросы для favicon (к-ые генерируются во всех местах) обрабатываются в default,
+// без перехвата до default
 app.get('*', function(req, res, next) {
 
-
-  switch (req.originalUrl) {
-    case '/userscl/users':
+  switch (true) {
+    case !!(~req.originalUrl.indexOf('getusers')):
+      console.log('in 1 case');
+      console.log('indexof: ' + (req.originalUrl.indexOf('getusers')));
       console.log('Request: [GET]', req.originalUrl);
+      // console.log(typeof req.originalUrl == 'string');  // true
       db.getUsers().then((data) => {
         res.send(data);
       });
     break;
 
-    case '/userscl/users/:userId':
-      console.log('Request get User: [GET]', req.originalUrl);
-      console.log(req.params.userId);
-      db.getUser(req.params.userId).then((data) => {
+    case !!(~req.originalUrl.indexOf('getuser') && !(~req.originalUrl.indexOf('favicon'))): {
+      var userId = req.originalUrl.slice(req.originalUrl.indexOf('getuser') + 7);
+      console.log('in 2 case');
+      console.log('userId is: ' + userId + ' indexof: ' + req.originalUrl.indexOf('getuser'));
+      console.log('Request: [GET]', req.originalUrl);
+      db.getUser(userId).then((data) => {
         res.send(data);
       });
+    }
     break;
 
-    default: {
-      console.log('Watch here!! Request: [GET]', req.originalUrl + 'Params: ' + req.params.userId + '**');
+    default:
+      console.log('default Watch here!! Request: [GET]', req.originalUrl);
       res.sendFile(path.resolve(__dirname, '../public/index.html'));
-    }
   }
 });
-
-/*
-app.get('*', function(req, res, next) {
-  console.log('Request: [GET]', req.originalUrl);
-  res.sendFile(path.resolve(__dirname, '../public/index.html'));
-});
-
-app.get('/userscl/main', (req, res) => {
-  db.getUsers().then(data => {
-    res.send(data);
-  });
-});
-*/
 
 /**
  * Error Handling

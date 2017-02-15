@@ -9042,11 +9042,11 @@ var axios = __webpack_require__(123),
 
 var api = {
   getUsers: function getUsers() {
-    return axios.get(conConfig.prefix + '/' + conConfig.name + '/users');
+    return axios.get(conConfig.prefix + '/' + conConfig.name + '/getusers');
   },
 
   getUser: function getUser(userId) {
-    return axios.get(conConfig.prefix + '/' + conConfig.name + '/users/getuser' + userId);
+    return axios.get(conConfig.prefix + '/' + conConfig.name + '/getuser' + userId);
   }
 
 };
@@ -9092,8 +9092,8 @@ var User = function (_React$Component) {
 
       var userId = this.props.params.userId;
       api.getUser(userId).then(function (res) {
-        var newUser = res.data;
-        console.log('newUser: ' + newUser + 'params: ' + userId);
+        var newUser = res.data[0];
+        console.dir(newUser);
         _this2.setState({
           user: newUser
         });

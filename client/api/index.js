@@ -3,11 +3,11 @@ const axios = require('axios'),
 
 var api = {
   getUsers: function() {
-    return axios.get(`${conConfig.prefix}/${conConfig.name}/users`);
+    return axios.get(`${conConfig.prefix}/${conConfig.name}/getusers`);
   },
 
   getUser: function(userId) {
-    return axios.get(`${conConfig.prefix}/${conConfig.name}/users/getuser${userId}`);
+    return axios.get(`${conConfig.prefix}/${conConfig.name}/getuser${userId}`);
   }
 
 };

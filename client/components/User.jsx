@@ -12,8 +12,8 @@ class User extends React.Component {
   componentDidMount() {
     let userId = this.props.params.userId;
     api.getUser(userId).then((res) => {
-      var newUser = res.data;
-      console.log('newUser: ' + newUser + 'params: ' + userId);
+      var newUser = res.data[0];
+      console.dir(newUser);
       this.setState({
         user: newUser
       });
