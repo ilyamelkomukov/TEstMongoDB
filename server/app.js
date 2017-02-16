@@ -22,6 +22,7 @@ app.use(express.static(path.resolve(__dirname, '../public'), {
 /*** To fill db or clear db ***/
 // db.populateDB();
 // db.killPopulationOfDB();
+/******************************/
 
 
 // TODO: Роутинг до конкретного пользователя "проваливается" в default, т.к. case с :userId не
@@ -33,12 +34,20 @@ app.use(express.static(path.resolve(__dirname, '../public'), {
 // пишется метка, после к-ой могут идти аргументы (без ?, !, #, $ и т.д.)
 // запросы для favicon (к-ые генерируются во всех местах) обрабатываются в default,
 // без перехвата до default
+// TODO: Improved answer: swutch переписан для string.match и регулярок, id юзера
+// сохраняется в скобочной группе. Когда нет скобочных групп выражение foundSomething[0]
+// ломает сервак, но св-во index есть. Switch производит строгое сравнение, поэтому
+// у case нужны !! для перевода в bool
 app.get('*', function(req, res, next) {
 
+  var RegExpForGetUsers = /getusers/i,
+    RegExpForGetUser = /getuser(\d)+/i,
+    RegExpForFavicon = /favicon/i;
+
   switch (true) {
-    case !!(~req.originalUrl.indexOf('getusers')):
+    case !!(req.originalUrl.match(RegExpForGetUsers)):
       console.log('in 1 case');
-      console.log('indexof: ' + (req.originalUrl.indexOf('getusers')));
+      console.log('indexof: ' + (req.originalUrl.match(RegExpForGetUsers).index));
       console.log('Request: [GET]', req.originalUrl);
       // console.log(typeof req.originalUrl == 'string');  // true
       db.getUsers().then((data) => {
@@ -46,10 +55,11 @@ app.get('*', function(req, res, next) {
       });
     break;
 
-    case !!(~req.originalUrl.indexOf('getuser') && !(~req.originalUrl.indexOf('favicon'))): {
-      var userId = req.originalUrl.slice(req.originalUrl.indexOf('getuser') + 7);
+    case !!(req.originalUrl.match(RegExpForGetUser) && !(req.originalUrl.match(RegExpForFavicon))): {
+      var foundForUserId = req.originalUrl.match(RegExpForGetUser);
+        userId = foundForUserId[1];
       console.log('in 2 case');
-      console.log('userId is: ' + userId + ' indexof: ' + req.originalUrl.indexOf('getuser'));
+      console.log('userId is: ' + userId + ' indexof: ' + foundForUserId.index);
       console.log('Request: [GET]', req.originalUrl);
       db.getUser(userId).then((data) => {
         res.send(data);
