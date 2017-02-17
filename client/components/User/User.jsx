@@ -4,26 +4,13 @@ const React = require('react'),
 class User extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: {}
-    };
   }
 
-  componentDidMount() {
-    let userId = this.props.params.userId;
-    api.getUser(userId).then((res) => {
-      var newUser = res.data[0];
-      console.dir(newUser);
-      this.setState({
-        user: newUser
-      });
-    });
-  }
 
   render() {
     return(
       <div>
-        <div>This is user: {this.state.user.name}</div>
+        <div>This is user: {this.props.user.name} with id: {this.props.user.userId}</div>
       </div>
     );
   }

@@ -12,10 +12,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-
-      // TODO: Create files, paths and folders for containers and views, after - redux
-      // Don`t rebuild before completed it
-
+      
       api: path.resolve(__dirname, './client/api/index.js'),
       App: path.resolve(__dirname, './client/components/App/AppContainer.jsx'),
       Home: path.resolve(__dirname, './client/components/Home/HomeContainer.jsx'),

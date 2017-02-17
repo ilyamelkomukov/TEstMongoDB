@@ -1,5 +1,4 @@
 const React = require('react'),
-  UserList = require('UserList'),
   {Link} = require('react-router');
 
 // create app for TEst
