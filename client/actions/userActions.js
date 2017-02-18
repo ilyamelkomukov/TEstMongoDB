@@ -8,5 +8,12 @@ var userActions = {
     };
   }
 
-  // TODO: Create action creator for getUser
+  function getUser(user) {
+    return {
+      type: actionTypes.GET_USER,
+      user: user
+    };
+  }
 };
+
+module.exports = userActions;

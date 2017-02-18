@@ -1,3 +1,5 @@
+// TODO: Continue with redux: let`s create redux approach for show single user
+
 const webpack = require('webpack'),
   path = require('path');
 
@@ -19,7 +21,10 @@ module.exports = {
       UserList: path.resolve(__dirname, './client/components/UserList/UserListContainer.jsx'),
       User: path.resolve(__dirname, './client/components/User/UserContainer.jsx'),
       Router: path.resolve(__dirname, './client/components/Router.jsx'),
-      actionTypes: path.resolve(__dirname, './client/actions/actionTypes.js')
+      actionTypes: path.resolve(__dirname, './client/actions/actionTypes.js'),
+      userActions: path.resolve(__dirname, './client/actions/userActions.js'),
+      reducers: path.resolve(__dirname, './client/reducers/reducers.js'),
+      store: path.resolve(__dirname, './client/store.js')
     }
   },
 

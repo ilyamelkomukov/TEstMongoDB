@@ -1,4 +1,5 @@
 const React = require('react'),
+  reactRedux = require('react-redux');
   UserList = require('./UserList.jsx'),
   api = require('api');
 
@@ -14,26 +15,23 @@ class UserListContainer extends React.Component {
   }
 
   onListUsers() {
-    api.getUsers()
-      .then((res) => {
-        let newUsers = res.data;
-        this.setState({
-          users: newUsers
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    api.getUsers();
   }
 
   render() {
     return (
       <UserList
-        users = {this.state.users}
+        users = {this.props.users}
         handleListUsers = {this.onListUsers.bind(null)}
       />
     );
   }
 }
 
-module.exports = UserListContainer;
+const mapStateToProps = function(store) {
+  return {
+    users: userState.users
+  };
+};
+
+module.exports = reactRedux.connect(mapStateToProps)(UserListContainer);

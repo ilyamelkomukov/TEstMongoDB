@@ -3,18 +3,25 @@
 const actionTypes = require('actionTypes');
 
 const initialState = {
-  users: []
+  users: [],
+  user: {}
 };
 
-// TODO: Finish with reducers 
+// TODO: Finish with reducers
 
-exports.userReducer = function(state = initialState, action) {
+function userReducer(state = initialState, action) {
 
   switch (type.action) {
-    case 'GET_USERS':
-        return Object.assign({}, state, {users: action.users});
+    case actionTypes.GET_USERS:
+      return Object.assign({}, state, {users: action.users});
+      break;
+
+    case actionTypes.GET_USER:
+      return Object.assign({}, state, {user: action.user});
       break;
   }
 
   return state;
 };
+
+module.exports = userReducer;
