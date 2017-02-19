@@ -1,36 +1,32 @@
 const React = require('react'),
   User = require('./User.jsx'),
-  api = require('api');
+  api = require('api'),
+  ReactRedux = require('react-redux'),
+  store = require('store');
 
 class UserContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      user: {}
-    };
   }
 
   componentDidMount() {
-    api.getUser(this.props.params.userId)
-      .then((res) => {
-        let newUser = res.data[0];
-        this.setState({
-          user: newUser
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    api.getUser(this.props.params.userId);
   }
 
   render() {
     return (
       <User
-        user = {this.state.user}
+        user = {this.props.user}
       />
     );
   }
 }
 
-module.exports = UserContainer;
+const mapStateToProps = function(store) {
+  return {
+    user: store.userState.user
+  };
+};
+
+module.exports = ReactRedux.connect(mapStateToProps)(UserContainer);

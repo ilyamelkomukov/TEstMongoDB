@@ -1,5 +1,3 @@
-// TODO: Continue with redux: let`s create redux approach for show single user
-
 const webpack = require('webpack'),
   path = require('path');
 

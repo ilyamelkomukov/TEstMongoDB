@@ -12,9 +12,12 @@ var api = {
   },
 
   getUser: function(userId) {
-    return axios.get(`${conConfig.prefix}/${conConfig.name}/getuser${userId}`).
+    return axios.get(`${conConfig.prefix}/${conConfig.name}/getuser${userId}`)
                 .then((res) => {
-                  store.dispatch(userActions.getUser(res.data));
+                  store.dispatch(userActions.getUser(res.data[0]));
+                })
+                .catch((err) => {
+                  console.log(err);
                 });
   }
 

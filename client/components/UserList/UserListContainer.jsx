@@ -1,15 +1,12 @@
 const React = require('react'),
-  reactRedux = require('react-redux');
+  reactRedux = require('react-redux'),
   UserList = require('./UserList.jsx'),
-  api = require('api');
+  api = require('api'),
+  store = require('store');
 
 class UserListContainer extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      users: []
-    };
 
     this.onListUsers = this.onListUsers.bind(this);
   }
@@ -30,7 +27,7 @@ class UserListContainer extends React.Component {
 
 const mapStateToProps = function(store) {
   return {
-    users: userState.users
+    users: store.userState.users
   };
 };
 

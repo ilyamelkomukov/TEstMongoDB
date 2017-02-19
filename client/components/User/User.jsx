@@ -6,8 +6,9 @@ class User extends React.Component {
     super(props);
   }
 
-
   render() {
+    debugger;
+
     return(
       <div>
         <div>This is user: {this.props.user.name} with id: {this.props.user.userId}</div>

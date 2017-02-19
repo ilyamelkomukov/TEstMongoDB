@@ -7,11 +7,10 @@ const initialState = {
   user: {}
 };
 
-// TODO: Finish with reducers
 
 function userReducer(state = initialState, action) {
 
-  switch (type.action) {
+  switch (action.type) {
     case actionTypes.GET_USERS:
       return Object.assign({}, state, {users: action.users});
       break;

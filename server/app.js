@@ -55,8 +55,8 @@ app.get('*', function(req, res, next) {
       });
     break;
 
-    case !!(req.originalUrl.match(RegExpForGetUser) && !(req.originalUrl.match(RegExpForFavicon))): {
-      var foundForUserId = req.originalUrl.match(RegExpForGetUser);
+    case !!(req.originalUrl.match(RegExpForGetUser) && !(req.originalUrl.match(RegExpForFavicon))):
+      var foundForUserId = req.originalUrl.match(RegExpForGetUser),
         userId = foundForUserId[1];
       console.log('in 2 case');
       console.log('userId is: ' + userId + ' indexof: ' + foundForUserId.index);
@@ -64,7 +64,6 @@ app.get('*', function(req, res, next) {
       db.getUser(userId).then((data) => {
         res.send(data);
       });
-    }
     break;
 
     default:
