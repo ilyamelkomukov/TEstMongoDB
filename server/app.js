@@ -14,6 +14,8 @@ db.setUpConnection();
 
 app.use(bodyParser.json());
 
+
+// Can be replaced with nodemon
 app.use(express.static(path.resolve(__dirname, '../public'), {
   dotfiles: 'ignore',
   index: false
